@@ -1,0 +1,15 @@
+*.pyc
+.tox
+*.egg-info
+
+.pytest_cache
+__pycache__/
+
+.venv
+venv/
+
+.vscode
+.idea
+
+docs/_build
+
