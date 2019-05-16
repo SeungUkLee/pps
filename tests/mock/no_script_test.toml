@@ -1,0 +1,13 @@
+[[source]]
+name = "test_file"
+url = "https://test_file.test"
+verify_ssl = true
+
+[dev-packages]
+test-dev-packages = "*"
+
+[packages]
+test-package = "*"
+
+[requires]
+python_version = "3.7"
