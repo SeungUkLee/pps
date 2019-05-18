@@ -1,7 +1,13 @@
+"""
+pss provide CLI that preview Pipfile script and run.
+
+$ pps
+$ pps --show
+"""
 import argparse
 import os
 
-from .color import Color
+from .color import CYAN, ENDC
 from .helper import (
     exception,
     inquirer_prompt,
@@ -9,11 +15,20 @@ from .helper import (
     run_script,
     toml_parsing,
 )
-from .message import Message
+from .message import EXE_SCRIPT_ERR_MSG
 
 
 @exception
 def run_pps_cmd(args, file_path, test=False):
+    """
+    Run 'pps' command
+    :param args: Arguments to distinguish test or run
+    :param file_path: Pipfile path.
+    :param test: Argument to distinguish whether it is a test or not.
+    :return: opt: CLI option (ex. --show).
+             res: Result after run script.
+             err: Whether the error occurred.
+    """
     scripts = toml_parsing(read_file(file_path))['scripts']
 
     opt, res, err = None, None, None
@@ -34,6 +49,10 @@ def run_pps_cmd(args, file_path, test=False):
 
 
 def arg_parser():
+    """
+    Create argument parser.
+    :return: Parser
+    """
     parser = argparse.ArgumentParser()
     parser.add_argument(
         '--show', help="show pipfile scripts list", action='store_true'
@@ -43,6 +62,11 @@ def arg_parser():
 
 
 def main(arg=None, file_path=None):
+    """
+    Main function to be executed by CLI.
+    :param arg: Arguments for testing
+    :param file_path: Pipfile path
+    """
     parser = arg_parser()
     args = (
         parser.parse_args()
@@ -55,9 +79,9 @@ def main(arg=None, file_path=None):
 
     opt, res, err = run_pps_cmd(args, file_path)
     if err == -1:
-        print(Message.EXE_SCRIPT_ERR_MSG)
+        print(EXE_SCRIPT_ERR_MSG)
         return
     if opt == 'show':
         for cmd_and_script in res:
             cmd, script = cmd_and_script.split(':')
-            print('{0}{1}{2}:{3}'.format(Color.CYAN, cmd, Color.ENDC, script))
+            print('{0}{1}{2}:{3}'.format(CYAN, cmd, ENDC, script))

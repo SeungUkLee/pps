@@ -1,4 +1,4 @@
-from pps.color import Color
+from pps.color import CYAN, ENDC
 
 INPUT_TOML_DATA = """[[source]]
     name = "test_file"
@@ -35,8 +35,8 @@ OUTPUT_TOML_DATA = {
 
 
 OPT_SHOW_DATA = """{0}echo{1}: "Echo Hello World!!"
-{2}version{3}: "python --version"
-{4}error{5}: "error"
+{0}version{1}: "python --version"
+{0}error{1}: "error"
 """.format(
-    Color.CYAN, Color.ENDC, Color.CYAN, Color.ENDC, Color.CYAN, Color.ENDC
+    CYAN, ENDC
 )

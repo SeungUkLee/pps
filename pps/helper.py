@@ -1,10 +1,18 @@
+"""
+Functions that help the run 'pps' command
+"""
 import functools
 import subprocess
 
 import inquirer
 import toml
 
-from .message import Message
+from .message import (
+    FILE_NOT_FOUND_MSG,
+    INQUIRER_MSG,
+    KEYBOARD_INTERRUPT_MSG,
+    KEYWORD_NOT_FOUND_MSG,
+)
 
 
 def exception(function):
@@ -18,19 +26,24 @@ def exception(function):
         try:
             return function(*args, **kwargs)
         except KeyError:
-            print(Message.KEYWORD_NOT_FOUND_MSG)
+            print(KEYWORD_NOT_FOUND_MSG)
             exit()
         except FileNotFoundError:
-            print(Message.FILE_NOT_FOUND_MSG)
+            print(FILE_NOT_FOUND_MSG)
             exit()
         except KeyboardInterrupt:
-            print(Message.KEYBOARD_INTERRUPT_MSG)
+            print(KEYBOARD_INTERRUPT_MSG)
             exit()
 
     return wrapper
 
 
 def read_file(file_path):
+    """
+    Read file
+    :param file_path: File path
+    :return: File content
+    """
     reader = open(file_path, 'r', encoding="utf8")
     file_content = reader.read()
     reader.close()
@@ -39,20 +52,33 @@ def read_file(file_path):
 
 
 def toml_parsing(toml_string):
+    """
+    Parses the "toml" string and return dictionary format
+    :param toml_string: String that is a "toml" file format.
+    :return: Return dictionary format
+    """
     parsed_toml = toml.loads(toml_string)
 
     return parsed_toml
 
 
 def inquirer_prompt(choice):
-    questions = [
-        inquirer.List('cmd', message=Message.INQUIRER_MESSAGE, choices=choice)
-    ]
+    """
+    Return selected results from choices.
+    :param choice: choices
+    :return: Return selected result
+    """
+    questions = [inquirer.List('cmd', message=INQUIRER_MSG, choices=choice)]
     answer = inquirer.prompt(questions)
     return answer
 
 
 def run_script(script):
-    p = subprocess.call(script, shell=True)
+    """
+    Run the script.
+    :param script: Script to run.
+    :return: The result of the script execution.
+    """
+    p_ret_code = subprocess.call(script, shell=True)
 
-    return p
+    return p_ret_code

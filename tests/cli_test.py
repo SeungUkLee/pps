@@ -4,7 +4,7 @@ import os
 import pytest
 
 from pps.cli import arg_parser, main, run_pps_cmd
-from pps.message import Message
+from pps.message import EXE_SCRIPT_ERR_MSG
 
 from .mock.data import OPT_SHOW_DATA
 
@@ -31,7 +31,7 @@ def test_run_cmd_pps(namespace):
     opt, res, err = run_pps_cmd(args=namespace, file_path=file_path, test=True)
 
     if err == -1:
-        pytest.fail(Message.EXE_SCRIPT_ERR_MSG)
+        pytest.fail(EXE_SCRIPT_ERR_MSG)
 
     if opt == 'show':
         assert res == [
