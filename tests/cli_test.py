@@ -36,8 +36,8 @@ def test_run_cmd_pps(namespace):
     if opt == 'show':
         assert res == [
             'echo: "Echo Hello World!!"',
-            'version: "python --version"',
             'error: "error"',
+            'version: "python --version"',
         ]
 
 

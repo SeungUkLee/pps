@@ -35,8 +35,8 @@ OUTPUT_TOML_DATA = {
 
 
 OPT_SHOW_DATA = """{0}echo{1}: "Echo Hello World!!"
-{0}version{1}: "python --version"
 {0}error{1}: "error"
+{0}version{1}: "python --version"
 """.format(
     CYAN, ENDC
 )

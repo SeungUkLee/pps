@@ -35,7 +35,8 @@ def run_pps_cmd(args, file_path, test=False):
     if args.show:
         opt = 'show'
         res = [
-            '{0}: "{1}"'.format(script, cmd) for script, cmd in scripts.items()
+            '{0}: "{1}"'.format(script, cmd)
+            for script, cmd in sorted(scripts.items())
         ]
     elif not test:
         ans = inquirer_prompt(scripts)
