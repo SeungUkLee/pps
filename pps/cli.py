@@ -74,9 +74,9 @@ def main(arg=None, file_path=None):
         if arg is None
         else parser.parse_args(arg.split(' '))
     )
-    root_dir = os.path.dirname(os.path.abspath(__file__))
+
     if file_path is None:
-        file_path = '{0}/../Pipfile'.format(root_dir)
+        file_path = '{0}/Pipfile'.format(os.getcwd())
 
     opt, res, err = run_pps_cmd(args, file_path)
     if err == -1:
