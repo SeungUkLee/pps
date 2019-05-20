@@ -27,7 +27,7 @@ def read_version():
 
 
 setup(
-    name='pps',
+    name='preview-pipfile-scripts',
     author='Seunguk Lee',
     author_email='lsy931106@gmail.com',
     description='Python CLI for previewing and running Pipfile scripts',
