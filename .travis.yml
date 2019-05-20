@@ -1,0 +1,25 @@
+language: python
+matrix:
+  include:
+  - python: '3.4'
+    env: TOXENV=py34
+  - python: '3.5'
+    env: TOXENV=py35
+  - python: '3.6'
+    env: TOXENV=py36
+  - python: '3.6'
+    env: TOXENV=lint
+install:
+- pip install tox codecov
+script:
+- tox -e $TOXENV
+after_success:
+- codecov
+deploy:
+  provider: pypi
+  user: Seunguk_Lee
+  password:
+    secure: 4WmzL/j3bt0gQrSo4dW77SxbnBtYzvNdvmCVcdAmJ18JoW67UR5o28RfoGqkp/gSznMpm/o7nG2Q/B+cfRUEPQfEYD0620puwUrCw3xpjaDj5Kt3cwK/gnds2H4jtQBgf3KuQf1Cv6Fjw1Ep8vO4eLMLrmRCfadM17Tbe3MTDqZ3fDjCI1dzfgomU5IRs8PNkEmL4xiacWq7v9xi6Ehke3Z1cVzKLWtX+96Ex0Y6M7HJk6d5WDx9O5yyLhaxPLUAET5oBaVIuEZyVxtLpgLgPybmFxbJ3jjTXdusMCQRXUisgk/jNasP0GX73tDgsVTAfkdlX4ra79Na1BuPJ5qCZseoRNrLxSdpsBvucOQxyMjt3rzwME5OEm5qZRH+Ui/6t/fyj091dq5Fq5j0T8kkrOnWzKRQ0j6PffC/ChTuhJgTRQWIt/E4nHbNkBmDi4OAkVcd2rAyR9RNPPOpyvoyxmWKJ4oKzkuR1wHXDkvdFA/lU/60PakM22zPU7RzDq6TqYfnO+J1np0QmfKvnBkebVlKgeHeEWdyOft9InpY83pHHQHrpxFbZvLkEsTjFc7oa93kQ8lQPH+TF8zx77H5vKqo059WCp3KQdbnHX8a9mt2KZzNBaTIGoEhuSGYRDsZmZesNt1kRUopHv6vFETRQ75OOnzlrT9ICmVVJ00pHAQ=
+  on:
+    tags: true
+    distributions: sdist bdist_wheel

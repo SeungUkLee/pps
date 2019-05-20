@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+isort -rc --check-only pps tests
+if [ $? -ne 0 ]; then
+    echo "[!] isort failed!"
+    exit 1
+fi
+echo "[+] isort success!"
+
+black -S -l 79 --check pps tests
+if [ $? -ne 0 ]; then
+    echo "[!] black failed!"
+    exit 1
+fi
+echo "[+] black success!"
+
+pylint pps
+if [ $? -ne 0 ]; then
+    echo "[!] pylint failed!"
+    exit 1
+fi
+echo "[+] pylint success!"
+
+pytest tests
+if [ $? -ne 0 ]; then
+    echo "[!] pytest failed!"
+    exit
+fi
+echo "[+] pytest success!"

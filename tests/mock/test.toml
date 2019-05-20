@@ -1,0 +1,18 @@
+[[source]]
+name = "test_file"
+url = "https://test_file.test"
+verify_ssl = true
+
+[scripts]
+echo = "Echo Hello World!!"
+version = "python --version"
+error = "error"
+
+[dev-packages]
+test-dev-packages = "*"
+
+[packages]
+test-package = "*"
+
+[requires]
+python_version = "3.7"
