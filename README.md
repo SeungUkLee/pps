@@ -18,9 +18,13 @@ $ pip install preview-pipfile-scripts
 
 ## Usage
 
+You can preview and run Pipfile scripts with the `pps` command.
+
 ```bash
 $ pps
 ```
+
+The `--show` option shows the commands defined in the Pipfile scripts.
 
 ```bash
 $ pps --show
